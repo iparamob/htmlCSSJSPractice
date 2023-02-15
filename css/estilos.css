@@ -1,0 +1,640 @@
+* {
+  box-sizing: border-box; /*Para no tener que andar restando bordes y paddings de las medidas*/
+  margin: 0; padding: 0; /*Eliminamos espacios por defecto del html, body o ul que usaremos*/
+}
+
+html {
+  height: 100%;
+}
+
+body {
+    background-color: #fff;
+    color: #777;
+    font: normal 15px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    min-height: 100%;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+h1 {
+  text-align:center;
+  border-style: double;
+}
+
+h2 {
+  font-weight: 300;
+  color: #FFF;
+  font-size: 55px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h4 {
+  text-decoration: underline;
+}
+
+a {
+  text-decoration: none;
+  color: #444;
+}
+
+a:hover {
+  color: #02b8dd;
+}
+
+strong {
+  font-weight: bold;
+}
+
+small {
+  font-size: 13px;
+  color: #777;
+  font-style: italic;
+}
+
+header {
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+*:focus {
+  border-color: #31a3dd; 
+}
+
+/* Estilos para mostrar el mensaje de error en los formularios */
+.alert {
+  /* Con esto hacemos como si hubiera un velo detrás del mensaje ocupando toda la pantalla*/
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  /* Div que contiene el mensaje de error flotando sobre el velo */
+  background-color: #fefefe;
+  margin: 15% auto; /* Centro y con margen */
+  padding: 5px;
+  border: 1px solid #444;
+  width: 60%;
+  text-align: center;
+}
+
+.close {
+  color: #aaaaaa;
+  margin-right: 5px;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Fin de los estilos del mensaje de error */
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Elimino el float después de la fila */
+.fila:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.columna {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.columna img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.alinearIzquierda {
+	display: inline-block; 
+	text-align: left; 
+  margin-left: 15px;
+}
+
+/* Cartas que rotan en la página de información */
+.carta {
+  flex: 50%;
+  padding: 10px;
+  background-color: transparent;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+}
+
+.carta-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Cuando pasamos el ratón por encima o lo activamos en un móvil rotamos la carta */
+/* El active se usa para pantallas tactiles */
+.carta:active .carta-inner {
+  transform: rotateY(180deg);
+}
+
+/* Cuando pasamos el ratón por encima o lo activamos en un móvil rotamos la carta */
+.carta:hover .carta-inner {
+  transform: rotateY(180deg);
+}
+
+.carta-front, .carta-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius:5px;
+}
+
+.carta-front {
+  background-color: #bbb;
+  color: black;
+  text-align:center;
+  padding: 2rem 0;
+}
+
+.carta-back {
+  background-color: #444;
+  color: #02b8dd;
+  transform: rotateY(180deg);
+  padding: 2%;
+} 
+
+.carta-back > p {
+  text-align: justify;
+  text-justify: inter-word;
+  display: block;
+}
+
+/** Fin de las cartas de la página de información */
+
+.portada-imagen {
+    height: 400px;
+    padding-top: 1px;
+    background: #e8eced url('../img/portadabn.png') no-repeat center;
+}
+
+.hportada-imagen h2 {
+    margin: 180px 0 40px 0;
+}
+
+form  { 
+  width: 100%;
+  margin: 0;
+}
+
+input[type=button] {
+  cursor: pointer;
+  background: #444;
+  border-radius: 3px;
+  color: #fff;
+  width: 180px;
+  height: 50px;
+  font-size: 20px;
+  margin: 0 auto;
+}
+
+input[type=button]:hover {
+  background-color: #02b8dd;
+  color: #fff;
+}
+
+input[type=text],input[type=number],input[type=date],input[type=time],input[type=tel],input[type=email],input, select, textarea{
+  padding: 8px;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+.calle {
+  width: 300px;
+}
+
+.textinput {
+  float: left;
+  width: 100%;
+  min-height: 75px;
+  outline: none;
+  resize: none;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+  border-style: dashed;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: table-cell; 
+}
+
+::placeholder, option, date, time, value {
+  color: #31a3dd; 
+  font-weight: bold;
+}
+
+.button-1 {
+    display: block;
+    text-align: center;
+    background: #444;
+    border-radius: 3px;
+    color: #fff;
+    width: 180px;
+    height: 50px;
+    font-size: 20px;
+    margin: 0 auto;
+    line-height: 50px;
+}
+
+.button-1:hover {
+    background-color: #02b8dd;
+    color: #fff;
+}
+
+.servicios {
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    float: left;
+    align-items: top;
+    margin: 0;
+    padding: 0;
+}
+
+.servicio {
+  flex: 25%;
+  max-width: 32%;
+  align-content: center;
+  text-align: center;
+}
+
+.mapa
+{
+  position: relative;
+  overflow: hidden;
+  height: 90%;
+  margin: 2%;
+}
+
+.mapaIframe
+{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    border: 1;
+    max-height: 80%;
+}
+
+main {
+  align-content: center;
+  padding-top: 5px;
+  padding-left: 0px;
+  height: 100%;
+  margin: 1%;
+}
+
+/* Estilos para el pie de página */
+footer
+{
+  padding-top: 5px;
+  width:100%;
+  height:60px;
+  text-align: center;
+  background-color: #33363b;
+  color: rgba(255,255,255,.5);
+}
+
+footer a
+{
+  color:#737373;
+}
+
+footer a:hover
+{
+  color:#02b8dd;
+  text-decoration:none;
+}
+
+/* Fin de pie de pagina */
+
+.container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+input[type="submit"] {
+  padding: 10px 20px; 
+  text-transform: uppercase; 
+  cursor: pointer; 
+  background-color: #31a3dd; 
+  border: solid 1px #ededed;
+}
+
+input[type="submit"]:hover {
+  background-color: #82C8EA;
+}
+
+.bloqueCalculo
+{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.detalleCalculo
+{
+  margin-left: auto;
+  max-width: 100%;
+  background-color:#CCC;
+  padding:16px;	
+	border:2px solid black; 
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;	
+	border-radius:8px;	
+}
+
+.detalleCalculo:after {
+	content:"";
+	display:table;
+	clear:both;
+}
+
+.dobleFila {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.simpleFila {
+  padding: 10px;
+}
+
+.formularioPedido {
+  box-sizing: border-box;
+}
+
+fieldset
+{
+  background: #444;
+  background-color:#CCC;
+	border:2px solid black; 
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;	
+	border-radius:8px;	
+  padding: 4px;
+  flex: 49%;
+  margin: 2px;
+}
+
+legend {
+  background: #444;
+  color: #FFF;
+  border: solid 1px black;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+.FieldsAddress {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.FieldsAddress > div {
+  margin: 6px;
+}
+
+a:hover img.imagedropshadow {
+  border: solid 1px #CCC;
+  -moz-box-shadow: 1px 1px 5px #999;
+  -webkit-box-shadow: 1px 1px 5px #999;
+      box-shadow: 1px 1px 5px #999;
+}
+
+.containerMenu {
+  position: relative;
+  width: 100%;
+}
+
+.text-block {
+  text-align: center;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+details
+{
+  background: #444;
+  background-color:#CCC;
+  max-width:100%;
+  padding:16px;	
+	border:2px solid black; 
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;	
+	border-radius:8px;	
+}
+
+summary {
+  background: #444;
+  border: solid 1px black;
+  color: #fff;
+  font-size: 20px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+@media all and (max-width: 780px) {
+  .columna {
+    flex: 100%;
+    max-width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+
+  .calle {
+    width: 100%;
+  }
+
+  .FieldsAddress {
+    flex: 100%;
+  }
+  .simpleFila {
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex: 100%;
+  }
+
+  fieldset {
+    flex: 100%;
+  }
+
+  h3 {
+    font-size: 3vw;
+  }
+
+  h2 {
+    font-size: 4vw;
+  }
+
+.carta-back > p {
+  font-size: 2vw;
+}
+
+.carta-back > ul > li {
+  font-size: 2vw;
+}
+
+table { border: 0; }
+
+table thead { display: none; }
+
+table tr {
+  border-bottom: 3px solid #ddd;
+  display: block;
+  margin-bottom: .625em;
+}
+
+table td {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  font-size: .8em;
+  text-align: right;
+}
+
+table td:before {
+  content: attr(data-label);
+  float: left;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+table td:last-child { border-bottom: 0; }
+
+}
+
+@media all and (max-width: 330px) {
+  .columna {
+    flex: 100%;
+  }
+
+  .calle {
+    width: 60%;
+  }
+
+  .FieldsAddress {
+    border-style: dashed;
+    flex: 100%;
+  }
+
+  fieldset {
+    flex: 100%;
+  }
+
+  .fieldset {
+    flex: 100%;
+  }
+
+  h3 {
+    font-size: 30vw;
+  }
+
+  .carta-back > p {
+    font-size: 2vw;
+  }
+
+  .carta-back > ul > li {
+  font-size: 2vw;
+  }
+
+  table { border: 0; }
+
+  table thead { 
+    display: none; 
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+
+  table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child { border-bottom: 0; }
+
+ }

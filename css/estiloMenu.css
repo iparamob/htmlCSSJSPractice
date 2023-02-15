@@ -1,0 +1,208 @@
+/* Inicialmente los oculto */
+.alternar,
+[id^=drop] {
+	display: none;
+}
+
+nav { 
+	line-height: 32px;
+	margin:0;
+	padding: 0;
+}
+
+/* Texto del nombre de la tienda */
+.logo {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	padding: 0 30px;
+	float: left;
+	font-size:22px;
+    font-weight: 700;
+	line-height: 60px;
+    color: #444;
+}
+
+.logotipo {
+	float:left; 
+	width:100%; 
+	height:auto; 
+	max-width: 126px;
+}
+
+/* Como hacemos que el texto se alinee a la izquierda tenemos que resetear el estilo después */
+nav:after {
+	content:"";
+	display:table;
+	clear:both;
+}
+
+nav ul {
+	float: right;
+	list-style: none;
+	position: relative;
+	padding:0;
+	margin:0;
+}
+	
+nav ul li {
+	margin: 0px;
+	display:inline-block;
+}
+
+nav a {
+	color:#444;
+	font-size:17px;
+	text-decoration:none;
+	display:block;
+	padding:14px 20px;	
+}
+
+nav ul li ul li:hover { 
+	color: #02b8dd; 
+	background: #FFF;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+
+nav a:hover { 
+	background-color: #444;
+	color: #02b8dd;
+}
+
+/* Ocultamos los submenus y les damos posicion absoluta */
+nav ul ul {
+	display: none;
+	position: absolute; 
+	top: 60px; 
+}
+	
+/* Mostramos los submenus cuando pasamos el ratón por encima */
+nav ul li:hover > ul {
+	display:inherit;
+    background-color: #f9f9f9;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+	
+nav ul ul li {
+	width:170px;
+	float:none;
+	display:list-item;
+	position: relative;
+}
+
+@media all and (max-width : 768px) {
+	/* Oculto el logotipo para que no ocupe espacio */
+	.logotipo {
+		display: none;
+	}
+
+	/* Ampliamos el texto con el nombre a todo el ancho*/
+	.logo {
+		display: block;
+		padding: 0;
+		width: 100%;
+		text-align: center;
+		float: none;
+	}
+
+	nav {
+		margin: 0;
+	}
+
+	.alternar + a,
+	.menu {
+		display: none;
+	}
+
+	.alternar {
+		display: block;
+		background-color: #FFF;
+		padding:14px 20px;	
+		color:#444;
+		font-size:17px;
+		text-decoration:none;
+		border:none;
+	}
+
+	.alternar:hover {
+		background-color: #444;
+		color: #02b8dd;
+	}
+
+	/* Muestra el menú al hacer clic */
+	[id^=drop]:checked + ul {
+		display: block;
+	}
+
+	/* Amplio el tamaño para ocupar todo el ancho de pantalla */
+	nav ul {
+		width: 100%;
+	}
+
+	/* Amplio el tamaño para ocupar todo el ancho de pantalla */
+	nav ul li {
+		display: block;
+		width: 100%;		
+		}
+
+	nav ul ul .alternar,
+	nav ul ul a {
+		padding: 0 40px;
+	}
+
+	nav ul ul ul a {
+		padding: 0 80px;
+	}
+
+	nav a:hover,
+ 	nav ul ul ul a {
+		background-color: #444;
+	}
+  
+	nav ul li ul li .alternar,
+	nav ul ul a,
+  	nav ul ul ul a{
+		padding:14px 20px;	
+		color:#FFF;
+		font-size:17px; 
+	}
+   
+	nav ul li ul li .alternar,
+	nav ul ul a {
+		background-color: #444; 
+	}
+
+	nav ul ul {
+		float: none;
+		position:static;
+		color: #ffffff;
+	}
+		
+	nav ul ul li:hover > ul,
+	nav ul li:hover > ul {
+		display: none;
+	}
+		
+	nav ul ul li {
+		display: block;
+		width: 100%;
+	}
+
+	nav ul ul ul li {
+		position: static;
+	}
+}
+
+@media all and (max-width : 330px) {
+	/* Ocultamos el logotipo cuando hay moviles */
+	.logotipo {
+		display: none;
+	}
+
+	nav ul li {
+		display:block;
+		width: 94%;
+	}
+}

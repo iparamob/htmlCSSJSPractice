@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comida a domicilio</title>
+    <link rel="stylesheet" href="css/estilos.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estiloMenu.css" type="text/css" media="screen">
+    <script src="./js/calculos.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <img src="./img/logo.png" class="logotipo" alt="La trastienda del Arima" />
+            <div class="logo">La trastienda del Arima</div>
+
+            <label for="drop" class="alternar">Menu</label>
+            <input type="checkbox" id="drop" />
+            <ul class="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li>
+                    <label for="drop-1" class="alternar">Pedidos <i class="fa fa-caret-down" aria-hidden="true"></i></label>
+                    <a href="#">Pedidos</a>
+                    <input type="checkbox" id="drop-1" />
+                    <ul>
+                        <li><a href="calcular.html">Precios</a></li>
+                        <li><a href="pideTuMenu.html">Pide tú menú</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <label for="drop-2" class="alternar">Nuestra carta <i class="fa fa-caret-down" aria-hidden="true"></i></label>
+                    <a href="#">Nuestra carta</a>
+                    <input type="checkbox" id="drop-2" />
+                    <ul>
+                        <li><a href="menus.html">Menús</a></li>
+                        <li><a href="nuestraCarta.html">Platos a la carta</a></li>
+                        <li><a href="bebidas.html">Bebidas</a></li>
+                        <li><a href="extras.html">Extras</a></li>
+                        <li><a href="postres.html">Postres</a></li>
+                    </ul>
+                </li>
+                <li><a href="dondeEstamos.html">¿Dónde estamos?</a></li>
+                <li><a href="preguntasFrecuentes.html">Preguntas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="formularioPedido">
+            <form id="formularioPedido" method="post" action="mailto:iparamo2@alumno.uned.es" enctype="multipart/form-data">
+                <div>
+                    <input type="button" value="Hacer pedido" onclick="javascript:realizarPedido()">
+                </div>
+                <div id="error" class="alert" role="alert" >
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <br>
+                        <p id="errorMsg"></p>
+                        <br><br>
+                    </div>
+                </div>    
+                <div class="dobleFila">
+                    <fieldset>
+                        <legend>Entrega del pedido</legend>
+                        <label for="fecha">Selecciona la fecha deseada:</label>
+                        <input type="date" name="Fecha de entrega" id="fecha">
+                        <br><br>
+                        <label for="hora">Selecciona la hora deseada:</label>
+                        <input type="time" name="Hora de entrega" id="hora">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Identificación</legend>
+                        <label for="nombre">Nombre: </label><input type="text" name="Nombre" id="nombre" maxlength="40" placeholder="Tú nombre">
+                        <label for="apellido1">Apellidos: </label>
+                        <input type="text" name="Primer apellido" id="apellido1" maxlength="40" placeholder="Primer apellido">&nbsp;&nbsp;
+                        <input type="text" name="Segundo apellido" id="apellido2" maxlength="40" placeholder="Segundo apellido">
+                        <label for="nif">NIF: </label><input type="text" name="nif" id="nif" maxlength="11" placeholder="000000000-X">
+                    </fieldset>
+                </div>
+                <div class="dobleFila">
+                    <fieldset>
+                        <legend>Información de contacto</legend>
+                        <label for="email">Dirección e-mail: </label><input type="email" name="Email" id="email" maxlength="100" placeholder="Pon tú correo">
+                        <label for="telefono">Teléfono: </label><input id="telefono" name="Teléfono" required type="tel" placeholder="000000000" />
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                        <legend>Cuenta corriente</legend>
+                        <label for="ccc">Número de cuenta</label>
+                        <input type="text" size="20" maxlength="16" id="ccc" name="Nº de tarjeta" placeholder="0000000000000000">
+                        <label for="cvv">CVV</label>
+                        <input type="number" max="999" id="cvv" min="000" placeholder="000" name="Código de seguridad">
+                        <label for="cccMesCaduc">Fecha expiración</label>
+                        <select id="cccMesCaduc" name="Mes de caducidad de la tarjeta">
+                            <option value="">-</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select id="cccAnyoCaduc" name="Año de caducidad de la tarjeta">
+                            <option value="">-</option>
+                            <option value="21">2021</option>
+                            <option value="22">2022</option>
+                            <option value="23">2023</option>
+                            <option value="24">2024</option>
+                            <option value="25">2025</option>
+                            <option value="26">2026</option>
+                        </select>
+                    </fieldset>
+                </div>
+                <div class="simpleFila">
+                    <fieldset>
+                        <legend>Dirección de entrega</legend>
+                        <div class="FieldsAddress">
+                            <div>
+                                <label for="municipio">Municipio: </label>
+                                <select name="Municipio" id="municipio">
+                                    <option value="">-</option>
+                                    <option value="MUSKIZ">MUSKIZ</option>
+                                    <option value="ORTUELLA">ORTUELLA</option>
+                                    <option value="ABANTO Y CIERBENA">ABANTO Y CIERBENA</option>
+                                    <option value="BARAKALDO">BARAKALDO</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="codpostal">Código postal: </label>
+                                <input type="text" name="Código postal" id="codpostal" size="7" maxlength="5" placeholder="00000">
+                            </div>
+                            <div>
+                                <label for="tipocalle">Tipo de vía: </label>
+                                <select name="Tipo de vía" id="tipocalle">
+                                    <option value="">-</option>
+                                    <option value="AVENIDA">AVENIDA</option>
+                                    <option value="BAJADA">BAJADA</option>
+                                    <option value="BARRIO">BARRIO</option>
+                                    <option value="CHALET">CHALET</option>
+                                    <option value="CALLE">CALLE</option>
+                                    <option value="CAMINO">CAMINO</option>
+                                    <option value="CAMPA">CAMPA</option>
+                                    <option value="CARRETERA">CARRETERA</option>
+                                    <option value="CASERIO">CASERIO</option>
+                                    <option value="CUESTA">CUESTA</option>
+                                    <option value="DISEMINADO">DISEMINADO</option>
+                                    <option value="EDIFICIO">EDIFICIO</option>
+                                    <option value="ENSANCHE">ENSANCHE</option>
+                                    <option value="ESTRADA">ESTRADA</option>
+                                    <option value="EXPLANADA">EXPLANADA</option>
+                                    <option value="GRUPO">GRUPO</option>
+                                    <option value="LUGAR">LUGAR</option>
+                                    <option value="MERCADO">MERCADO</option>
+                                    <option value="MUELLE">MUELLE</option>
+                                    <option value="MONTE">MONTE</option>
+                                    <option value="POBLADO">POBLADO</option>
+                                    <option value="POLIGONO">POLÍGONO</option>
+                                    <option value="PARQUE">PARQUE</option>
+                                    <option value="PARTICULAR">PARTICULAR</option>
+                                    <option value="PASEO">PASEO</option>
+                                    <option value="PUENTE">PUENTE</option>
+                                    <option value="PLAZA">PLAZA</option>
+                                    <option value="RAMPA">RAMPA</option>
+                                    <option value="RIBERA">RIBERA</option>
+                                    <option value="SUBIDA">SUBIDA</option>
+                                    <option value="TRAVESIA">TRAVESÍA</option>
+                                    <option value="URBANIZACION">URBANIZACIÓN</option>
+                                    <option value="VIA PUBLICA">VIA PÚBLICA</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="calle">Calle: </label><input type="text" class="calle" maxlength="35" name="Calle" id="calle" placeholder="La calle en la que entregar el pedido">
+                            </div>
+                        </div>
+                        <div class="FieldsAddress">
+                            <div>
+                                <label for="numPortal">Nº portal: </label>
+                                <input type="number" name="Nº de portal" id="numPortal" placeholder="0000" min="1" max="9999">
+                            </div>
+                            <div>
+                                <label for="bisdup">Bis/Dup: </label>
+                                <input type="text" name="Bis/dup" id="bisdup" maxLength="1" size="8" placeholder="Bis o guión si no es bis">
+                            </div>
+                            <div>
+                                <label for="escalera">Escalera: </label>
+                                <input type="text" name="Escalera" id="escalera" maxLength="1" placeholder="Escalera o guión si no hay">
+                            </div>
+                            <div>
+                                <label for="piso">Piso: </label>
+                                <input type="text" name="Piso" id="piso" maxlength="2" placeholder="Nº del piso">
+                            </div>
+                            <div>
+                                <label for="mano">Mano: </label>
+                                <input type="text" name="Mano" id="mano" maxlength="2" placeholder="Mano o guión si no hay">
+                            </div>
+                            <div>
+                                <label for="puerta">Puerta: </label>
+                                <input type="text" name="Puerta" id="puerta" maxlength="3" placeholder="Puerta o guión si no hay">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                        <legend>Observaciones</legend>
+                        <textarea class="textinput" id="observaciones" name="Observaciones sobre el pedido" maxlength="600"
+                            placeholder="Observaciones sobre el pedido a solicitar"></textarea>
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                        <legend>Elige tú pedido</legend>
+                        <details>
+                            <summary>Comida y bebida:</summary>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Calorías</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Menú cervecera</td>
+                                        <td><input type="number" min="0" max="10" id="menu1Cant" name="Menú cervecera" value="0"></td>
+                                        <td>22 €</td>
+                                        <td>100 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menú chuletón</td>
+                                        <td><input type="number" min="0" max="10" id="menu2Cant" name="Menú chuletón" value="0"></td>
+                                        <td>28 €</td>
+                                        <td>487 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menú arroz con bogavante</td>
+                                        <td><input type="number" min="0" max="10" id="menu3Cant" name="Menú arroz con bogavante" value="0"></td>
+                                        <td>28 €</td>
+                                        <td>328 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menú alubiada</td>
+                                        <td><input type="number" min="0" max="10" id="menu4Cant" name="Menú alubiada" value="0"></td>
+                                        <td>22 €</td>
+                                        <td>419 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menú infantil rojo</td>
+                                        <td><input type="number" min="0" max="10" id="menu5Cant" name="Menú infantil rojo" value="0"></td>
+                                        <td>6,50 €</td>
+                                        <td>145 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menú infantil azul</td>
+                                        <td><input type="number" min="0" max="10" id="menu6Cant" name="Menú infantil azul" value="0"></td>
+                                        <td>6,50 €</td>
+                                        <td>137 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menú infantil blanco</td>
+                                        <td><input type="number" min="0" max="10" id="menu7Cant" name="Menú infantil blanco" value="0"></td>
+                                        <td>6,50 €</td>
+                                        <td>171 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menú infantil verde</td>
+                                        <td><input type="number" min="0" max="10" id="menu8Cant" name="Menú infantil verde" value="0"></td>
+                                        <td>6,50 €</td>
+                                        <td>161 Kcal</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </details>
+                        <br>
+                        <details>
+                            <summary>Sólo comida:</summary>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Calorías</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Ceviche de corvina</td>
+                                        <td><input type="number" min="0" max="10" id="menu9Cant" name="Ceviche de corvina" value="0"></td>
+                                        <td>7,45 €</td>
+                                        <td>120 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Marmitako de atún</td>
+                                        <td><input type="number" min="0" max="10" id="menu10Cant" name="Marmitako de atún" value="0"></td>
+                                        <td>5,95 €</td>
+                                        <td>100 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alubias con sacramentos</td>
+                                        <td><input type="number" min="0" max="10" id="menu11Cant" name="Alubias con sacramentos" value="0"></td>
+                                        <td>6,95 €</td>
+                                        <td>177 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pollo al chilindrón</td>
+                                        <td><input type="number" min="0" max="10" id="menu12Cant" name="Pollo al chilindrón" value="0"></td>
+                                        <td>6,25 €</td>
+                                        <td>209 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Espinacas con pollo y anacardos</td>
+                                        <td><input type="number" min="0" max="10" id="menu13Cant" name="Espinacas con pollo y anacardos" value="0"></td>
+                                        <td>5,35 €</td>
+                                        <td>195 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Carrillada con arroz salvaje</td>
+                                        <td><input type="number" min="0" max="10" id="menu14Cant" name="Carrillada con arroz salvaje" value="0"></td>
+                                        <td>6,85 €</td>
+                                        <td>179 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Morcillo con puré de patata</td>
+                                        <td><input type="number" min="0" max="10" id="menu15Cant" name="Morcillo con puré de patata" value="0"></td>
+                                        <td>6,40 €</td>
+                                        <td>131 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pollo curry con verduras y arroz</td>
+                                        <td><input type="number" min="0" max="10" id="menu16Cant" name="Pollo curry con verduras y arroz" value="0"></td>
+                                        <td>4,60 €</td>
+                                        <td>186 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Potaje de garbanzos y bacalao</td>
+                                        <td><input type="number" min="0" max="10" id="menu17Cant" name="Potaje de garbanzos y bacalao" value="0"></td>
+                                        <td>5,65 €</td>
+                                        <td>119 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cuscus de verduras</td>
+                                        <td><input type="number" min="0" max="10" id="menu18Cant" name="Cuscus de verduras" value="0"></td>
+                                        <td>6,25 €</td>
+                                        <td>103 Kcal</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Lasaña de carne de ternera</td>
+                                        <td><input type="number" min="0" max="10" id="menu19Cant" name="Lasaña de carne de ternera" value="0"></td>
+                                        <td>7,65 €</td>
+                                        <td>205 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lentejas con verdura</td>
+                                        <td><input type="number" min="0" max="10" id="menu20Cant" name="Lentejas con verdura" value="0"></td>
+                                        <td>5,25 €</td>
+                                        <td>99 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arroz con pollo</td>
+                                        <td><input type="number" min="0" max="10" id="menu21Cant" name="Arroz con pollo" value="0"></td>
+                                        <td>6,75 €</td>
+                                        <td>110 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Crema de guisantes</td>
+                                        <td><input type="number" min="0" max="10" id="menu22Cant" name="Crema de guisantes" value="0"></td>
+                                        <td>4,50 €</td>
+                                        <td>80 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arroz meloso con rape y gambas</td>
+                                        <td><input type="number" min="0" max="10" id="menu23Cant" name="Arroz meloso con rape y gambas" value="0"></td>
+                                        <td>6,25 €</td>
+                                        <td>180 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arroz al horno con queso y setas shiitake</td>
+                                        <td><input type="number" min="0" max="10" id="menu24Cant" name="Arroz al horno con queso y setas shiitake" value="0"></td>
+                                        <td>7,25 €</td>
+                                        <td>183 Kcal</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </details>
+                        <br>
+                        <details>
+                            <summary>Bebidas:</summary>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Calorías</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Bornos Frizzante Verdejo</td>
+                                        <td><input type="number" min="0" max="10" id="menu25Cant" name="Bornos Frizzante Verdejo" value="0"></td>
+                                        <td>12,50 €</td>
+                                        <td>120 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mar de Frades</td>
+                                        <td><input type="number" min="0" max="10" id="menu26Cant" name="Mar de Frades" value="0"></td>
+                                        <td>14,00 €</td>
+                                        <td>100 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Viña Pomal crianza</td>
+                                        <td><input type="number" min="0" max="10" id="menu27Cant" name="Viña Pomal crianza" value="0"></td>
+                                        <td>9,00 €</td>
+                                        <td>160 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cerveza Duchesse de Bourgogne</td>
+                                        <td><input type="number" min="0" max="10" id="menu28Cant" name="Cerveza Duchesse de Bourgogne" value="0"></td>
+                                        <td>2,80 €</td>
+                                        <td>170 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cerveza Birra Moretti</td>
+                                        <td><input type="number" min="0" max="10" id="menu29Cant" name="Cerveza Birra Moretti" value="0"></td>
+                                        <td>1,21 €</td>
+                                        <td>140 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Refresco de cola</td>
+                                        <td><input type="number" min="0" max="10" id="menu30Cant" name="Refresco de cola" value="0"></td>
+                                        <td>0,60 €</td>
+                                        <td>120 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Refresco de naranja</td>
+                                        <td><input type="number" min="0" max="10" id="menu31Cant" name="Refresco de naranja" value="0"></td>
+                                        <td>0,60 €</td>
+                                        <td>120 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Refresco de limón</td>
+                                        <td><input type="number" min="0" max="10" id="menu32Cant" name="Refresco de limón" value="0"></td>
+                                        <td>0,60 €</td>
+                                        <td>120 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Botellín de agua</td>
+                                        <td><input type="number" min="0" max="10" id="menu33Cant" name="Botellín de agua" value="0"></td>
+                                        <td>0,40 €</td>
+                                        <td>0 Kcal</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </details>
+                        <br>
+                        <details>
+                            <summary>Extras:</summary>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Calorías</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Barra de pan blanco</td>
+                                        <td><input type="number" min="0" max="10" id="menu34Cant" name="Barra de pan blanco" value="0"></td>
+                                        <td>1,00 €</td>
+                                        <td>60 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Barra de pan integral</td>
+                                        <td><input type="number" min="0" max="10" id="menu35Cant" name="Barra de pan integral" value="0"></td>
+                                        <td>1,15 €</td>
+                                        <td>40 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Salsa ali-oli</td>
+                                        <td><input type="number" min="0" max="10" id="menu36Cant" name="Salsa ali-oli" value="0"></td>
+                                        <td>1,00 €</td>
+                                        <td>100 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Salsa barbacoa</td>
+                                        <td><input type="number" min="0" max="10" id="menu37Cant" name="Salsa barbacoa" value="0"></td>
+                                        <td>1,15 €</td>
+                                        <td>200 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mostaza</td>
+                                        <td><input type="number" min="0" max="10" id="menu38Cant" name="Mostaza" value="0"></td>
+                                        <td>0,90 €</td>
+                                        <td>140 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mahonesa</td>
+                                        <td><input type="number" min="0" max="10" id="menu39Cant" name="Mahonesa" value="0"></td>
+                                        <td>0,90 €</td>
+                                        <td>114 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ración de patatas</td>
+                                        <td><input type="number" min="0" max="10" id="menu40Cant" name="Ración de patatas" value="0"></td>
+                                        <td>1,50 €</td>
+                                        <td>190 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ración de calamares</td>
+                                        <td><input type="number" min="0" max="10" id="menu41Cant" name="Ración de calamares" value="0"></td>
+                                        <td>2,00 €</td>
+                                        <td>210 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Flan de queso</td>
+                                        <td><input type="number" min="0" max="10" id="menu42Cant" name="Flan de queso" value="0"></td>
+                                        <td>1,00 €</td>
+                                        <td>110 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cuajada</td>
+                                        <td><input type="number" min="0" max="10" id="menu43Cant" name="Cuajada" value="0"></td>
+                                        <td>0,90 €</td>
+                                        <td>100 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Natillas de galleta</td>
+                                        <td><input type="number" min="0" max="10" id="menu44Cant" name="Natillas de galleta" value="0"></td>
+                                        <td>1,00 €</td>
+                                        <td>175 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tarta de queso</td>
+                                        <td><input type="number" min="0" max="10" id="menu45Cant" name="Tarta de queso" value="0"></td>
+                                        <td>1,40 €</td>
+                                        <td>250 Kcal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tarta de fresa</td>
+                                        <td><input type="number" min="0" max="10" id="menu46Cant" name="Tarta de fresa" value="0"></td>
+                                        <td>1,00 €</td>
+                                        <td>175 Kcal</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </details>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer class="pie">
+        <div class="container">
+            <div>
+                <a href="https://www.facebook.com/La-trastienda-del-arima-101124798567961/" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/latrastienda.arima/" target="_blank" rel="noopener noreferrer">
+                    <i class="fa fa-instagram"></i>
+                </a>
+            </div>
+            <p class="copyright">Copyright &copy; 2021 Derechos reservados
+                <a href="https://es.linkedin.com/in/i%C3%B1aki-paramo-bocigas-17b21512" target="_blank"
+                    rel="noopener noreferrer">Iñaki Páramo</a>.
+            </p>
+        </div>
+    </footer>
+    <script src="./js/browser.js"></script>
+</body>
+
+</html>
